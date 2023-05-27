@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 
-const url = 'https://www.shiseido.com/us/en/makeup/makeup-category/face/';
+const url = 'https://www.shiseido.com/us/en/sets-and-travel/gift-sets/';
 
 request(url, (error, response, html) => {
   if (!error && response.statusCode == 200) {
@@ -57,7 +57,10 @@ request(url, (error, response, html) => {
         //Lấy short description
         const description = await page.$eval('.product-description', element => element.textContent.trim());
         console.log(description)
+
         //Lấy full description
+        const longDescription = await page.$eval('.pdp-content-inner p', element => element.textContent.replace(/\n/g, '').trim());
+        console.log(longDescription)
         // let description = '';
         // axios.get(productUrl)
         // .then(response => {
@@ -152,6 +155,7 @@ request(url, (error, response, html) => {
           name,
           price,
           description,
+          longDescription,
           attributes: attributes.join(', '),
           images: images.join(', '),
         })
@@ -165,7 +169,9 @@ request(url, (error, response, html) => {
           { id: 'price', title: 'Regular price' },
           { id: 'attributes', title: 'Attribute name' },
           { id: 'images', title: 'Images' },
-          { id: 'description', title: 'Product description' }
+          { id: 'description', title: 'Product description' },
+          { id: 'longDescription', title: 'Long description' }
+
         ]
       });
 
