@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 
-const url = 'hhttps://www.shiseido.com/us/en/skincare/serums-and-treatments/';
+const url = 'https://www.shiseido.com/us/en/skincare/serums-and-treatments/';
 
 request(url, (error, response, html) => {
   if (!error && response.statusCode == 200) {
