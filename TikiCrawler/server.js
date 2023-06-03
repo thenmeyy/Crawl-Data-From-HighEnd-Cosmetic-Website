@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 
-const url = 'https://www.shiseido.com/us/en/sets-and-travel/gift-sets/';
+const url = 'hhttps://www.shiseido.com/us/en/skincare/serums-and-treatments/';
 
 request(url, (error, response, html) => {
   if (!error && response.statusCode == 200) {
@@ -82,8 +82,8 @@ request(url, (error, response, html) => {
 
       
         //Lấy ảnh
-        const images = await page.$$eval('.product-thumbnails img', (image) =>
-          image.map((img) => img.src)
+        const images = await page.$$eval('.slick-track button', (buttons) =>
+          buttons.map((button) => button.getAttribute('data-zoomimg'))
         );
 
         //Lấy bảng màu
